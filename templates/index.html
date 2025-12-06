@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수학 공식 사전</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📐 수학 공식 사전</h1>
+            <p>중고등학생을 위한 수학 공식 모음</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="공식 검색... (예: 이차방정식, 미분)">
+                <button onclick="performSearch()">검색</button>
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </section>
+
+        <section class="categories">
+            <h2>카테고리별 공식</h2>
+            <div class="category-grid">
+                <a href="/formulas?category=middle" class="category-card">
+                    <h3>중학교 수학</h3>
+                    <p>기본적인 수학 공식과 개념</p>
+                </a>
+                <a href="/formulas?category=high1" class="category-card">
+                    <h3>수학 I</h3>
+                    <p>다항식, 방정식, 부등식</p>
+                </a>
+                <a href="/formulas?category=high2" class="category-card">
+                    <h3>수학 II</h3>
+                    <p>함수, 미분, 적분</p>
+                </a>
+                <a href="/formulas?category=calculus" class="category-card">
+                    <h3>미적분</h3>
+                    <p>미분법, 적분법</p>
+                </a>
+                <a href="/formulas?category=probability" class="category-card">
+                    <h3>확률과 통계</h3>
+                    <p>확률, 통계</p>
+                </a>
+                <a href="/formulas?category=all" class="category-card">
+                    <h3>전체 보기</h3>
+                    <p>모든 공식 보기</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 수학 공식 사전. 중고등학생을 위한 수학 학습 자료.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+

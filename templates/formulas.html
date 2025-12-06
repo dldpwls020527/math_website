@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수학 공식 목록 - 수학 공식 사전</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">📐 수학 공식 사전</a></h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="/">홈</a> > 공식 목록
+        </nav>
+
+        <section class="formulas-list">
+            <h2>수학 공식 목록</h2>
+            
+            <div class="category-filter">
+                <a href="/formulas?category=all" class="filter-btn {% if current_category == 'all' %}active{% endif %}">전체</a>
+                {% for cat in categories %}
+                <a href="/formulas?category={{ cat.id }}" class="filter-btn {% if current_category == cat.id %}active{% endif %}">
+                    {{ cat.name }}
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="formulas-grid">
+                {% for formula in formulas %}
+                <div class="formula-card">
+                    <h3><a href="/formula/{{ formula.id }}">{{ formula.name }}</a></h3>
+                    {% if formula.image or formula.video or formula.code %}
+                    <div class="media-badges">
+                        {% if formula.image %}<span class="badge badge-image">📷 이미지</span>{% endif %}
+                        {% if formula.video %}<span class="badge badge-video">🎥 동영상</span>{% endif %}
+                        {% if formula.code %}<span class="badge badge-code">💻 코드</span>{% endif %}
+                    </div>
+                    {% endif %}
+                    <div class="formula-preview">
+                        <p class="formula-math">$${{ formula.formula }}$$</p>
+                    </div>
+                    <p class="formula-desc">{{ formula.description[:100] }}{% if formula.description|length > 100 %}...{% endif %}</p>
+                    <a href="/formula/{{ formula.id }}" class="read-more">자세히 보기 →</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if formulas|length == 0 %}
+            <div class="no-results">
+                <p>표시할 공식이 없습니다.</p>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 수학 공식 사전</p>
+        </div>
+    </footer>
+</body>
+</html>
+
