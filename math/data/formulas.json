@@ -1,0 +1,149 @@
+{
+  "categories": [
+    {
+      "id": "middle",
+      "name": "중학교 수학",
+      "formulas": [
+        {
+          "id": 1,
+          "name": "이차방정식의 근의 공식",
+          "formula": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
+          "description": "이차방정식 ax² + bx + c = 0 (a ≠ 0)의 해를 구하는 공식입니다. 판별식 D = b² - 4ac의 값에 따라 근의 개수가 결정됩니다.",
+          "example": "x² - 5x + 6 = 0의 경우, a=1, b=-5, c=6이므로 x = (5 ± √(25-24))/2 = (5 ± 1)/2 따라서 x = 3 또는 x = 2",
+          "image": "/static/images/근의공식.png",
+          "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "code": {
+            "language": "python",
+            "content": "import math\n\ndef quadratic_formula(a, b, c):\n    \"\"\"이차방정식 ax² + bx + c = 0의 해를 구하는 함수\"\"\"\n    discriminant = b**2 - 4*a*c\n    \n    if discriminant < 0:\n        return \"실근이 없습니다 (허근)\"\n    elif discriminant == 0:\n        x = -b / (2*a)\n        return f\"중근: x = {x}\"\n    else:\n        x1 = (-b + math.sqrt(discriminant)) / (2*a)\n        x2 = (-b - math.sqrt(discriminant)) / (2*a)\n        return f\"두 근: x₁ = {x1:.2f}, x₂ = {x2:.2f}\"\n\n# 예제: x² - 5x + 6 = 0\nresult = quadratic_formula(1, -5, 6)\nprint(result)  # 두 근: x₁ = 3.00, x₂ = 2.00",
+            "description": "Python으로 이차방정식의 근을 계산하는 코드입니다."
+          }
+        },
+        {
+          "id": 2,
+          "name": "피타고라스의 정리",
+          "formula": "a^2 + b^2 = c^2",
+          "description": "직각삼각형에서 빗변의 길이의 제곱은 나머지 두 변의 길이의 제곱의 합과 같습니다. 여기서 c는 빗변의 길이입니다.",
+          "example": "직각삼각형의 두 변이 각각 3, 4일 때, 빗변의 길이는 √(3² + 4²) = √25 = 5",
+          "image": "/static/images/피타고라스.png",
+          "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "code": {
+            "language": "python",
+            "content": "import math\n\ndef pythagorean_theorem(a, b, find_c=True):\n    \"\"\"피타고라스의 정리를 사용하여 빗변 또는 한 변의 길이를 구하는 함수\"\"\"\n    if find_c:\n        # 빗변 c 구하기\n        c = math.sqrt(a**2 + b**2)\n        return f\"빗변의 길이 c = {c:.2f}\"\n    else:\n        # 한 변 구하기 (c가 빗변)\n        other_side = math.sqrt(c**2 - min(a, b)**2)\n        return f\"다른 변의 길이 = {other_side:.2f}\"\n\n# 예제: 두 변이 3, 4인 직각삼각형\nresult = pythagorean_theorem(3, 4)\nprint(result)  # 빗변의 길이 c = 5.00",
+            "description": "피타고라스의 정리를 사용하여 직각삼각형의 변의 길이를 계산하는 코드입니다."
+          }
+        },
+        {
+          "id": 3,
+          "name": "원의 넓이",
+          "formula": "S = \\pi r^2",
+          "description": "반지름이 r인 원의 넓이를 구하는 공식입니다. π(파이)는 약 3.14159...입니다.",
+          "example": "반지름이 5cm인 원의 넓이는 π × 5² = 25π ≈ 78.54 cm²",
+          "image": "/static/images/원의 넓이.png"
+        }
+      ]
+    },
+    {
+      "id": "high1",
+      "name": "수학 I",
+      "formulas": [
+        {
+          "id": 4,
+          "name": "이차함수의 최댓값/최솟값",
+          "formula": "y = a(x-p)^2 + q",
+          "description": "이차함수의 표준형입니다. a > 0이면 최솟값 q를, a < 0이면 최댓값 q를 가집니다. 꼭짓점의 좌표는 (p, q)입니다.",
+          "example": "y = 2(x-3)² + 5의 경우, 꼭짓점은 (3, 5)이고 최솟값은 5입니다.",
+          "image": "/static/images/이차함수.png"
+        },
+        {
+          "id": 5,
+          "name": "삼각함수의 기본 관계식",
+          "formula": "\\sin^2 \\theta + \\cos^2 \\theta = 1",
+          "description": "삼각함수의 가장 기본적인 항등식입니다. 임의의 각 θ에 대해 항상 성립합니다.",
+          "example": "sin 30° = 1/2, cos 30° = √3/2일 때, (1/2)² + (√3/2)² = 1/4 + 3/4 = 1"
+        }
+      ]
+    },
+    {
+      "id": "high2",
+      "name": "수학 II",
+      "formulas": [
+        {
+          "id": 6,
+          "name": "미분의 정의",
+          "formula": "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}",
+          "description": "함수 f(x)의 도함수를 정의하는 공식입니다. 접선의 기울기를 나타냅니다.",
+          "example": "f(x) = x²의 경우, f'(x) = 2x",
+          "image": "https://via.placeholder.com/600x300/667eea/ffffff?text=미분+접선+그래프",
+          "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "code": {
+            "language": "python",
+            "content": "import numpy as np\nimport matplotlib.pyplot as plt\n\ndef derivative(f, x, h=1e-5):\n    \"\"\"수치적으로 미분을 계산하는 함수\"\"\"\n    return (f(x + h) - f(x)) / h\n\ndef f(x):\n    return x**2\n\n# x = 2에서의 미분값 계산\nx = 2\nf_prime = derivative(f, x)\nprint(f\"f'(2) = {f_prime:.2f}\")  # f'(2) = 4.00\n\n# SymPy를 사용한 기호 미분\nfrom sympy import symbols, diff\nx_sym = symbols('x')\nf_sym = x_sym**2\nf_prime_sym = diff(f_sym, x_sym)\nprint(f\"기호 미분: {f_prime_sym}\")  # 2*x",
+            "description": "Python으로 미분을 수치적으로 계산하거나 기호적으로 계산하는 코드입니다."
+          }
+        },
+        {
+          "id": 7,
+          "name": "합성함수의 미분법 (연쇄법칙)",
+          "formula": "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)",
+          "description": "합성함수를 미분할 때 사용하는 공식입니다. 안쪽 함수의 미분과 바깥쪽 함수의 미분을 곱합니다.",
+          "example": "f(x) = (x² + 1)³의 경우, f'(x) = 3(x² + 1)² · 2x = 6x(x² + 1)²"
+        }
+      ]
+    },
+    {
+      "id": "calculus",
+      "name": "미적분",
+      "formulas": [
+        {
+          "id": 8,
+          "name": "정적분의 기본정리",
+          "formula": "\\int_a^b f(x) dx = F(b) - F(a)",
+          "description": "F(x)가 f(x)의 부정적분일 때, a부터 b까지의 정적분은 F(b) - F(a)와 같습니다.",
+          "example": "∫₀¹ x² dx = [x³/3]₀¹ = 1/3 - 0 = 1/3",
+          "image": "https://via.placeholder.com/600x300/764ba2/ffffff?text=정적분+그래프",
+          "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "code": {
+            "language": "python",
+            "content": "from scipy import integrate\nimport numpy as np\n\n# 수치 적분\nf = lambda x: x**2\nresult, error = integrate.quad(f, 0, 1)\nprint(f\"∫₀¹ x² dx = {result:.3f}\")  # ∫₀¹ x² dx = 0.333\n\n# SymPy를 사용한 기호 적분\nfrom sympy import symbols, integrate as sympy_integrate\nx = symbols('x')\nf_sym = x**2\nintegral = sympy_integrate(f_sym, (x, 0, 1))\nprint(f\"기호 적분: {integral}\")  # 1/3",
+            "description": "Python으로 정적분을 수치적으로 계산하거나 기호적으로 계산하는 코드입니다."
+          }
+        },
+        {
+          "id": 9,
+          "name": "부분적분법",
+          "formula": "\\int u dv = uv - \\int v du",
+          "description": "두 함수의 곱을 적분할 때 사용하는 방법입니다. u와 v를 적절히 선택하는 것이 중요합니다.",
+          "example": "∫ x·eˣ dx에서 u=x, dv=eˣdx로 놓으면 = xeˣ - ∫ eˣ dx = xeˣ - eˣ + C"
+        },
+        {
+          "id": 10,
+          "name": "치환적분법",
+          "formula": "\\int f(g(x))g'(x) dx = \\int f(u) du",
+          "description": "복잡한 적분을 간단하게 만들기 위해 변수를 치환하는 방법입니다. u = g(x)로 치환합니다.",
+          "example": "∫ 2x·(x²+1)³ dx에서 u = x²+1로 치환하면 = ∫ u³ du = u⁴/4 + C = (x²+1)⁴/4 + C"
+        }
+      ]
+    },
+    {
+      "id": "probability",
+      "name": "확률과 통계",
+      "formulas": [
+        {
+          "id": 11,
+          "name": "조건부 확률",
+          "formula": "P(A|B) = \\frac{P(A \\cap B)}{P(B)}",
+          "description": "사건 B가 일어났을 때 사건 A가 일어날 확률입니다. P(B) > 0일 때 정의됩니다.",
+          "example": "주사위를 던져서 짝수가 나왔을 때, 4 이상의 수가 나올 확률은 P(4 이상|짝수) = P({4,6})/P({2,4,6}) = (2/6)/(3/6) = 2/3"
+        },
+        {
+          "id": 12,
+          "name": "이항분포의 평균과 분산",
+          "formula": "E(X) = np, \\quad Var(X) = np(1-p)",
+          "description": "이항분포 B(n, p)에서 평균은 np, 분산은 np(1-p)입니다. n은 시행 횟수, p는 성공 확률입니다.",
+          "example": "동전을 10번 던질 때 앞면이 나오는 횟수의 평균은 10 × 0.5 = 5, 분산은 10 × 0.5 × 0.5 = 2.5"
+        }
+      ]
+    }
+  ]
+}
+

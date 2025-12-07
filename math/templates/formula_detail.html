@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ formula.name }} - 수학 공식 사전</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">📐 수학 공식 사전</a></h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="/">홈</a> > 
+            <a href="/formulas?category={{ category.id }}">{{ category.name }}</a> > 
+            {{ formula.name }}
+        </nav>
+
+        <article class="formula-detail">
+            <h2>{{ formula.name }}</h2>
+            <div class="formula-category">
+                카테고리: <span>{{ category.name }}</span>
+            </div>
+
+            <div class="formula-main">
+                <h3>공식</h3>
+                <div class="formula-display">
+                    $${{ formula.formula }}$$
+                </div>
+            </div>
+
+            <div class="formula-description">
+                <h3>설명</h3>
+                <p>{{ formula.description }}</p>
+            </div>
+
+            {% if formula.example %}
+            <div class="formula-example">
+                <h3>예제</h3>
+                <p>{{ formula.example }}</p>
+            </div>
+            {% endif %}
+
+            {% if formula.image %}
+            <div class="formula-image">
+                <h3>📷 시각적 설명</h3>
+                <img src="{{ formula.image }}" alt="{{ formula.name }} 이미지" class="formula-img">
+            </div>
+            {% endif %}
+
+            {% if formula.video %}
+            <div class="formula-video">
+                <h3>🎥 동영상 설명</h3>
+                <div class="video-container">
+                    {% if 'youtube.com' in formula.video or 'youtu.be' in formula.video %}
+                        {% set video_id = formula.video.split('v=')[1].split('&')[0] if 'v=' in formula.video else formula.video.split('/')[-1] %}
+                        <iframe src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {% elif 'vimeo.com' in formula.video %}
+                        {% set video_id = formula.video.split('/')[-1] %}
+                        <iframe src="https://player.vimeo.com/video/{{ video_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    {% else %}
+                        <video controls>
+                            <source src="{{ formula.video }}" type="video/mp4">
+                            브라우저가 비디오 태그를 지원하지 않습니다.
+                        </video>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if formula.code %}
+            <div class="formula-code">
+                <h3>💻 코드 예제</h3>
+                <div class="code-block">
+                    <pre><code class="language-{{ formula.code.language or 'python' }}">{{ formula.code.content }}</code></pre>
+                    {% if formula.code.description %}
+                    <p class="code-description">{{ formula.code.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="formula-actions">
+                <a href="/formulas?category={{ category.id }}" class="btn-back">← 목록으로</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 수학 공식 사전</p>
+        </div>
+    </footer>
+</body>
+</html>
+
